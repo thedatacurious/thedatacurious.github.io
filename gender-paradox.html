@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Alexandra Khoo">
+  <meta name="description" content="A gender-equality paradox in STEM? | In countries that are more gender-equal, are women less likely to be in STEM? That&#39;s what psychologists Gijsbert...">
+
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">  
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" media="all">
+  <link rel="stylesheet" href="https://thedatacurious.github.io/theme/css/font.css" type="text/css" media="all">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://thedatacurious.github.io/theme/css/style.css" type="text/css" media="all">
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://thedatacurious.github.io/theme/js/functions.js"></script>
+
+  
+ 
+
+
+<meta name="keywords" content="R, gender">
+
+kj
+
+  <title>A gender-equality paradox in STEM?</title>
+
+  
+</head>
+
+<body class="home blog">
+  <div>
+    <header class="site-header">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="row">
+            <div class="site-navigation-inner col-sm-12">
+              <div class="navbar-header">
+                <button type="button" class="btn navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul id="menu-all-pages" class="nav navbar-nav">
+                <li class="menu-item"><a href="/about.html" >About
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="/portfolio.html" >Portfolio
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="/sharing.html" >Sharing
+<i class="fa  fa-lg"></i></a></li>
+                <li class="menu-item"><a href="/index.html" >Articles
+<i class="fa  fa-lg"></i></a></li>
+              </ul>
+              </div>
+              <div class="social">   
+                <a data-email="moc.liamg@suoirucatadeht:otliam" data-title="Email" title="You need javascript enabled to view this email" class="email">
+<i class="fa fa-envelope fa-lg"></i></a>
+                <a href="http://github.com/thedatacurious" title="GitHub" >
+<i class="fa fa-github fa-lg"></i></a>
+                <a href="https://www.linkedin.com/in/alexandra-khoo-15517557/" title="Linkedin" >
+<i class="fa fa-linkedin fa-lg"></i></a>
+                <a href="https://medium.com/@the.data.curious" title="Medium" >
+<i class="fa fa-medium fa-lg"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav><!-- .site-navigation -->
+
+      <div class="container">
+      <div id="logo">
+        <span class="site-name"><a class="navbar-brand" href="https://thedatacurious.github.io"><img width="200" src="https://raw.githubusercontent.com/thedatacurious/thedatacurious.github.io-src/master/content/images/profile.png" class="attachment-full size-full" alt="logo">          </a>
+        </span><!-- end of .site-name -->
+      </div><!-- end of #logo -->
+      <div><!-- class = 'tagline' removed -->
+<!--           -->
+      </div>
+    </div>
+
+  </header><!-- #masthead -->
+  </div>
+    <div id="content" class="site-content">
+      <div class="container main-content-area">
+        <div class="row">
+          <div class="main-content-inner col-sm-12 col-md-12">
+            <div id="primary" class="content-area">
+              <div id="main" class="site-main" role="main">
+                <div class="article-container">
+<article>
+  <div class="blog-item-wrap">
+    <div class="post-inner-content">
+      <header class="entry-header page-header">
+        <span class="cat-item"><time datetime="2018-10-07 00:00:00+08:00">Oct 07, 2018</time></span>
+        <h1 class="entry-title"><a href="https://thedatacurious.github.io/gender-paradox.html">A gender-equality paradox in STEM?</a></h1>
+      </header><!-- .entry-header -->
+      <div class="fb-like" data-href="https://thedatacurious.github.io/gender-paradox.html" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+      <div class="entry-content">
+        <p>In countries that are more gender-equal, are women less likely to be in STEM? That's what psychologists Gijsbert Stoet, at Leeds Beckett University, and David Geary, at the University of Missouri, found in their 2018 <a href="http://journals.sagepub.com/doi/abs/10.1177/0956797617741719?journalCode=pssa">study</a>. They also found that girls performed similarly to or better than boys in science in two of every three countries.</p>
+<p>I will recreate their scatterplot of countries based on 1) the number of female STEM graduates and 2) the Gender Gap Index score, a measure of gender equality by the World Economic Forum. Let's also design the chart to show the countries' GDP per capita and geographical groups to see if any patterns emerge.</p>
+<p><img alt="Scatterplot from the study" src="https://cdn.theatlantic.com/assets/media/img/posts/2018/02/Screen_Shot_2018_02_16_at_12.33.16_PM/d099fa13a.png"></p>
+<h2>Gather the data</h2>
+<p>In summary, the Gender Gap Index measures the level of gender equality across four dimensions: Economic Participation and Opportunity, Educational Attainment, Health and Survival, and Political Empowerment. The higher the score, the better a country is performing on that index.</p>
+<p>Get the Index data. It's from a World Economic Forum report (in pdf!) but fortunately, it's also available in csv format, courtesy of the World Bank. The csv data was only up to 2016 when accessed but it'll do. Go to the <a href="https://tcdata360.worldbank.org/indicators/af52ebe9?country=BRA&amp;indicator=27962&amp;viz=line_chart&amp;years=2006,2016#">World Bank webpage</a> to download the data.</p>
+<div class="highlight"><pre><span></span><span class="c1"># install.packages(&quot;dplyr&quot;) if not yet installed</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span>
+<span class="c1"># Read in Gender Gap Index data</span>
+<span class="n">genderindex</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Data on percentage of female STEM graduates can be found at <a href="http://data.uis.unesco.org/Index.aspx?DataSetCode=EDULIT_DS">UNESCO's data portal on education</a>. In the left tab, select <em>Completion</em> &gt; <em>Percentage of tertiary graduates</em> &gt; <em>Percentage of female graduates by field of study</em>.</p>
+<p>Customise selection to <em>Percentage of graduates from Science, Technology , Engineering and Mathematics programmes in tertiary education who are female (%)</em> and load the data.</p>
+<div class="highlight"><pre><span></span><span class="n">femSTEM</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;EDULIT_DS_06102018112127863.csv&quot;</span><span class="p">)</span> <span class="c1"># Read in STEM percentage data. The file name will differ based on the date/time of loading.</span>
+</pre></div>
+
+
+<p>Data on countries' GDP per capita (current US dollars) can be found at <a href="http://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=csv">another World Bank webpage</a></p>
+<p>The link loads a zipped folder but we can use the <em>unzip</em> function.</p>
+<p>The unzipped content includes some metadata files but only the main file is of interest.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Read in countries&#39; GDP per capita data</span>
+<span class="n">GDPcapita</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;API_NY.GDP.PCAP.CD_DS2_en_csv_v2_10134337.csv&quot;</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</pre></div>
+
+
+<p>For regional groupings, we will refer to the UN Statistics Division's <a href="https://unstats.un.org/unsd/methodology/m49/overview/#">methodology</a>. Click on the <em>language</em> tab of choice for options to load the data.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Read in regional groupings data</span>
+<span class="n">geogrp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;UNSD — Methodology.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>Preview and clean the data</h2>
+<p>A quick look at <em>genderindex</em> shows that besides the Gender Gap Index, subindices that compose this overall index are also included in the dataset. We're only interested in countries' overall index scores so we'll create a new dataframe with the relevant subset in a series of steps.</p>
+<div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">genderindex</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## &#39;data.frame&#39;:    1885 obs. of  15 variables:
+##  $ Country.ISO3     : Factor w/ 148 levels &quot;AGO&quot;,&quot;ALB&quot;,&quot;ARE&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Country.Name     : Factor w/ 148 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ Indicator        : Factor w/ 6 levels &quot;Global Gender Gap Economic Participation and Opportunity Subindex&quot;,..: 1 1 2 2 3 3 4 4 5 5 ...
+##  $ Subindicator.Type: Factor w/ 4 levels &quot;Index&quot;,&quot;Normalized Score&quot;,..: 1 3 1 3 1 3 1 3 1 3 ...
+##  $ X2006            : num  0.587 69 0.779 107 0.98 ...
+##  $ X2007            : num  0.585 87 0.779 119 0.98 ...
+##  $ X2008            : num  0.584 87 0.778 122 0.98 ...
+##  $ X2009            : num  0.583 96 0.778 127 0.98 ...
+##  $ X2010            : num  0.63 76 0.785 125 0.98 ...
+##  $ X2011            : num  0.594 96 0.786 126 0.98 ...
+##  $ X2012            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ X2013            : num  0.616 92 0.806 127 0.98 ...
+##  $ X2014            : num  0.588 111 0.721 138 0.975 ...
+##  $ X2015            : num  0.59 116 0.726 141 0.98 1 0.251 38 0.637 126 ...
+##  $ X2016            : num  0.565 120 0.778 138 0.98 1 0.251 40 0.643 117 ...
+</pre></div>
+
+
+<div class="highlight"><pre><span></span> <span class="c1">#Reshape the data from &#39;wide&#39; to &#39;long&#39; form</span>
+ <span class="c1">#Select rows that meet conditions</span>
+<span class="n">genderindex2</span> <span class="o">&lt;-</span> <span class="n">genderindex</span> <span class="o">%&gt;%</span> <span class="nf">gather</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span> <span class="n">Score</span><span class="p">,</span> <span class="n">X2006</span><span class="o">:</span><span class="n">X2016</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">subset</span><span class="p">(</span><span class="n">Indicator</span> <span class="o">==</span> <span class="s">&quot;Overall Global Gender Gap Index&quot;</span> <span class="o">&amp;</span> <span class="n">Subindicator.Type</span> <span class="o">==</span> <span class="s">&quot;Index&quot;</span><span class="p">)</span>
+<span class="c1">#Keep only columns of interest</span>
+<span class="n">genderindex2</span> <span class="o">&lt;-</span> <span class="n">genderindex2[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Country.Name&quot;</span><span class="p">,</span> <span class="s">&quot;Country.ISO3&quot;</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="s">&quot;Score&quot;</span><span class="p">)</span><span class="n">]</span>
+ <span class="c1"># Rename  variables to keep things tidier</span>
+<span class="n">genderindex2</span> <span class="o">&lt;-</span> <span class="nf">rename</span><span class="p">(</span><span class="n">genderindex2</span><span class="p">,</span> <span class="n">Country</span> <span class="o">=</span> <span class="n">Country.Name</span><span class="p">,</span> <span class="n">Code</span> <span class="o">=</span> <span class="n">Country.ISO3</span><span class="p">)</span>
+<span class="c1"># Use regrex to remove the &#39;x&#39; in front of the year</span>
+<span class="n">genderindex2</span><span class="o">$</span><span class="n">Year</span> <span class="o">&lt;-</span> <span class="nf">sub</span><span class="p">(</span><span class="s">&quot;^.&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">genderindex2</span><span class="o">$</span><span class="n">Year</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now let's do the same for <em>femSTEM</em>.</p>
+<div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">femSTEM</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## &#39;data.frame&#39;:    369 obs. of  9 variables:
+##  $ EDULIT_IND: Factor w/ 1 level &quot;FGP_5T8_F500600700&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Indicator : Factor w/ 1 level &quot;Percentage of graduates from Science, Technology , Engineering and Mathematics programmes in tertiary education&quot;| __truncated__: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ LOCATION  : Factor w/ 126 levels &quot;ABW&quot;,&quot;AGO&quot;,&quot;ALB&quot;,..: 9 9 9 10 10 10 13 13 13 13 ...
+##  $ Country   : Factor w/ 126 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 9 9 9 10 10 10 15 15 15 15 ...
+##  $ TIME      : int  2013 2014 2015 2014 2015 2016 2012 2013 2014 2015 ...
+##  $ Time      : int  2013 2014 2015 2014 2015 2016 2012 2013 2014 2015 ...
+##  $ Value     : num  30.7 31 31.7 26.1 25.3 ...
+##  $ Flag.Codes: Factor w/ 4 levels &quot;&quot;,&quot;+&quot;,&quot;a&quot;,&quot;n&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Flags     : Factor w/ 4 levels &quot;&quot;,&quot;Category not applicable&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">femSTEM2</span> <span class="o">&lt;-</span> <span class="n">femSTEM[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;LOCATION&quot;</span><span class="p">,</span> <span class="s">&quot;Country&quot;</span><span class="p">,</span>
+<span class="s">&quot;Time&quot;</span><span class="p">,</span> <span class="s">&quot;Value&quot;</span><span class="p">)</span><span class="n">]</span>
+<span class="n">femSTEM2</span> <span class="o">&lt;-</span> <span class="nf">rename</span><span class="p">(</span><span class="n">femSTEM2</span><span class="p">,</span> <span class="n">Code</span> <span class="o">=</span> <span class="n">LOCATION</span><span class="p">,</span>
+  <span class="n">Year</span> <span class="o">=</span> <span class="n">Time</span><span class="p">,</span> <span class="n">PercentageFemGrad</span> <span class="o">=</span> <span class="n">Value</span><span class="p">)</span>
+<span class="n">femSTEM2</span><span class="o">$</span><span class="n">Year</span> <span class="o">&lt;-</span> <span class="nf">as.character.Date</span><span class="p">(</span><span class="n">femSTEM2</span><span class="o">$</span><span class="n">Year</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Likewise for GDPcapita...</p>
+<div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">GDPcapita</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## &#39;data.frame&#39;:    264 obs. of  63 variables:
+##  $ Country.Name  : Factor w/ 264 levels &quot;Afghanistan&quot;,..: 11 1 6 2 5 8 250 9 10 4 ...
+##  $ Country.Code  : Factor w/ 264 levels &quot;ABW&quot;,&quot;AFG&quot;,&quot;AGO&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Indicator.Name: Factor w/ 1 level &quot;GDP per capita (current US$)&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Indicator.Code: Factor w/ 1 level &quot;NY.GDP.PCAP.CD&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ X1960         : num  NA 59.8 NA NA NA ...
+##  $ X1961         : num  NA 59.9 NA NA NA ...
+##  $ X1962         : num  NA 58.5 NA NA NA ...
+##  $ X1963         : num  NA 78.8 NA NA NA ...
+##  $ X1964         : num  NA 82.2 NA NA NA ...
+##  $ X1965         : num  NA 101 NA NA NA ...
+##  $ X1966         : num  NA 138 NA NA NA ...
+##  $ X1967         : num  NA 161 NA NA NA ...
+##  $ X1968         : num  NA 130 NA NA NA ...
+##  $ X1969         : num  NA 130 NA NA NA ...
+##  $ X1970         : num  NA 157 NA NA 3239 ...
+##  $ X1971         : num  NA 160 NA NA 3498 ...
+##  $ X1972         : num  NA 136 NA NA 4217 ...
+##  $ X1973         : num  NA 144 NA NA 5342 ...
+##  $ X1974         : num  NA 175 NA NA 6320 ...
+##  $ X1975         : num  NA 188 NA NA 7169 ...
+##  $ X1976         : num  NA 199 NA NA 7152 ...
+##  $ X1977         : num  NA 226 NA NA 7751 ...
+##  $ X1978         : num  NA 249 NA NA 9130 ...
+##  $ X1979         : num  NA 278 NA NA 11821 ...
+##  $ X1980         : num  NA 275 664 NA 12377 ...
+##  $ X1981         : num  NA 266 600 NA 10372 ...
+##  $ X1982         : num  NA NA 579 NA 9610 ...
+##  $ X1983         : num  NA NA 582 NA 8023 ...
+##  $ X1984         : num  NA NA 597 663 7729 ...
+##  $ X1985         : num  NA NA 712 663 7774 ...
+##  $ X1986         : num  NA NA 648 719 10362 ...
+##  $ X1987         : num  NA NA 721 699 12616 ...
+##  $ X1988         : num  NA NA 762 677 14304 ...
+##  $ X1989         : num  NA NA 863 723 15166 ...
+##  $ X1990         : num  NA NA 923 639 18879 ...
+##  $ X1991         : num  NA NA 845 349 19533 ...
+##  $ X1992         : num  NA NA 641 218 20548 ...
+##  $ X1993         : num  NA NA 430 381 16516 ...
+##  $ X1994         : num  17342 NA 321 619 16235 ...
+##  $ X1995         : num  16442 NA 388 761 18461 ...
+##  $ X1996         : num  16585 NA 513 1046 19017 ...
+##  $ X1997         : num  17927 NA 507 750 18353 ...
+##  $ X1998         : num  19081 NA 420 865 18895 ...
+##  $ X1999         : num  19356 NA 386 1098 19262 ...
+##  $ X2000         : num  20621 NA 555 1176 21937 ...
+##  $ X2001         : num  20671 117 526 1327 22229 ...
+##  $ X2002         : num  20434 188 711 1454 24741 ...
+##  $ X2003         : num  20835 199 779 1891 32776 ...
+##  $ X2004         : num  22568 219 1041 2417 38503 ...
+##  $ X2005         : num  23303 250 1444 2709 41282 ...
+##  $ X2006         : num  24015 273 2062 3005 43749 ...
+##  $ X2007         : num  25921 370 2879 3603 48583 ...
+##  $ X2008         : num  27547 373 3869 4371 47786 ...
+##  $ X2009         : num  24631 446 3348 4114 43339 ...
+##  $ X2010         : num  24272 553 3531 4094 39736 ...
+##  $ X2011         : num  25325 604 4299 4437 41099 ...
+##  $ X2012         : num  NA 669 4539 4248 38391 ...
+##  $ X2013         : num  NA 639 4805 4413 40620 ...
+##  $ X2014         : num  NA 629 4708 4579 42295 ...
+##  $ X2015         : num  NA 570 3684 3953 36038 ...
+##  $ X2016         : num  NA 562 3309 4132 37232 ...
+##  $ X2017         : num  NA 586 4170 4538 39147 ...
+##  $ X             : logi  NA NA NA NA NA NA ...
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">GDPcapita2</span> <span class="o">&lt;-</span> <span class="n">GDPcapita</span> <span class="o">%&gt;%</span>
+<span class="nf">gather</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span> <span class="n">GDPcapitaUSD</span><span class="p">,</span> <span class="n">X1960</span><span class="o">:</span><span class="n">X2017</span><span class="p">)</span> <span class="o">%&gt;%</span>
+<span class="nf">rename</span><span class="p">(</span><span class="n">Country</span> <span class="o">=</span> <span class="n">Country.Name</span><span class="p">,</span> <span class="n">Code</span> <span class="o">=</span> <span class="n">Country.Code</span><span class="p">)</span>
+<span class="n">GDPcapita2</span> <span class="o">&lt;-</span> <span class="n">GDPcapita2[</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Country&quot;</span><span class="p">,</span> <span class="s">&quot;Code&quot;</span><span class="p">,</span> <span class="s">&quot;GDPcapitaUSD&quot;</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">)</span><span class="n">]</span>
+<span class="c1"># Use regrex to remove the &#39;x&#39; in front of the year</span>
+<span class="n">GDPcapita2</span><span class="o">$</span><span class="n">Year</span> <span class="o">&lt;-</span> <span class="nf">sub</span><span class="p">(</span><span class="s">&quot;^.&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">GDPcapita2</span><span class="o">$</span><span class="n">Year</span><span class="p">)</span>
+</pre></div>
+
+
+<p>...as well as for geogrp. It looks like no change is required except a little renaming for consistency.</p>
+<div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">geogrp</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## &#39;data.frame&#39;:    252 obs. of  15 variables:
+##  $ Global.Code                            : Factor w/ 2 levels &quot;001&quot;,&quot;Developing&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Global.Name                            : Factor w/ 2 levels &quot;&quot;,&quot;World&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Region.Code                            : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ Region.Name                            : Factor w/ 6 levels &quot;&quot;,&quot;Africa&quot;,&quot;Americas&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Sub.region.Code                        : int  15 15 15 15 15 15 15 202 202 202 ...
+##  $ Sub.region.Name                        : Factor w/ 18 levels &quot;&quot;,&quot;Australia and New Zealand&quot;,..: 9 9 9 9 9 9 9 16 16 16 ...
+##  $ Intermediate.Region.Code               : int  NA NA NA NA NA NA NA 14 14 14 ...
+##  $ Intermediate.Region.Name               : Factor w/ 9 levels &quot;&quot;,&quot;Caribbean&quot;,..: 1 1 1 1 1 1 1 5 5 5 ...
+##  $ Country.or.Area                        : Factor w/ 248 levels &quot;&quot;,&quot;Afghanistan&quot;,..: 5 69 128 149 212 226 245 34 39 52 ...
+##  $ M49.Code                               : Factor w/ 250 levels &quot;&quot;,&quot;004&quot;,&quot;008&quot;,..: 5 232 124 143 209 224 210 28 34 49 ...
+##  $ ISO.alpha3.Code                        : Factor w/ 249 levels &quot;&quot;,&quot;344&quot;,&quot;446&quot;,..: 68 70 130 139 194 227 72 108 22 54 ...
+##  $ Least.Developed.Countries..LDC.        : Factor w/ 5 levels &quot;&quot;,&quot;BES&quot;,&quot;HKG&quot;,..: 1 1 1 1 5 1 1 1 5 5 ...
+##  $ Land.Locked.Developing.Countries..LLDC.: Factor w/ 2 levels &quot;&quot;,&quot;x&quot;: 1 1 1 1 1 1 1 1 2 1 ...
+##  $ Small.Island.Developing.States..SIDS.  : Factor w/ 2 levels &quot;&quot;,&quot;x&quot;: 1 1 1 1 1 1 1 1 1 2 ...
+##  $ Developed...Developing.Countries       : Factor w/ 4 levels &quot;&quot;,&quot;Developed&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">geogrp</span> <span class="o">&lt;-</span> <span class="nf">rename</span><span class="p">(</span><span class="n">geogrp</span><span class="p">,</span> <span class="n">Code</span> <span class="o">=</span> <span class="n">ISO.alpha3.Code</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The latest data we downloaded on the Gender Gap Index was for 2016 so let's try to merge the datasets for that year. A check on the available data for 2016 indicate we should ideally have 85 matches. However, we only got 80 matches.</p>
+<div class="highlight"><pre><span></span><span class="n">femSTEM3</span> <span class="o">&lt;-</span> <span class="n">femSTEM2</span> <span class="o">%&gt;%</span> <span class="nf">subset</span><span class="p">(</span><span class="n">Year</span> <span class="o">==</span> <span class="s">&quot;2016&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">femSTEM2</span><span class="p">)</span>
+<span class="n">genderindex3</span> <span class="o">&lt;-</span> <span class="n">genderindex2</span> <span class="o">%&gt;%</span> <span class="nf">subset</span><span class="p">(</span><span class="n">Year</span> <span class="o">==</span> <span class="s">&quot;2016&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">na.omit</span><span class="p">(</span><span class="n">genderindex2</span><span class="p">)</span>
+<span class="nf">nrow</span><span class="p">(</span><span class="n">femSTEM3</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## [1] 85
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nf">nrow</span><span class="p">(</span><span class="n">genderindex3</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## [1] 144
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">combined</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">femSTEM3</span><span class="p">,</span> <span class="n">genderindex3</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&quot;Code&quot;</span><span class="p">)</span>
+<span class="nf">nrow</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## [1] 80
+</pre></div>
+
+
+<p>Use the <em>merge</em> function again to identify the countries that got dropped (i.e. Gender Gap Index did not have data on these countries, at least for the year 2016).</p>
+<div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">femSTEM3</span><span class="p">,</span> <span class="n">combined</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&quot;Code&quot;</span><span class="p">,</span> <span class="n">all.x</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="nf">is.na</span><span class="p">(</span><span class="n">Score</span><span class="p">))</span>
+<span class="n">test</span><span class="o">$</span><span class="n">Country</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>## [1] Democratic Republic of the Congo          
+## [2] Eritrea                                   
+## [3] China, Macao Special Administrative Region
+## [4] Palestine                                 
+## [5] Seychelles                                
+## 126 Levels: Albania Algeria Andorra Angola ... Zimbabwe
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">GDPcapita3</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">GDPcapita2</span><span class="p">,</span> <span class="n">Year</span> <span class="o">==</span> <span class="s">&quot;2016&quot;</span> <span class="o">&amp;</span> <span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">GDPcapitaUSD</span><span class="p">))</span>
+<span class="n">combined2</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="nf">merge</span><span class="p">(</span><span class="kc">...</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Code&quot;</span><span class="p">)),</span> <span class="nf">list</span><span class="p">(</span><span class="n">femSTEM3</span><span class="p">,</span> <span class="n">genderindex3</span><span class="p">,</span><span class="n">GDPcapita3</span><span class="p">,</span><span class="n">geogrp</span><span class="p">))</span>
+<span class="c1">#Use Reduce function to merge more than 2 dataframes simultaneously</span>
+</pre></div>
+
+
+<h2>Visualise the data</h2>
+<p>Let's start with a basic scatterplot. This <a href="http://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-6-weighted-scatterplots.html">ggplot tutorial</a> by Jodie Burchell and Mauricio Vargas Sepúlveda is a major help.</p>
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">combined2</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">PercentageFemGrad</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="n">Score</span><span class="p">))</span>
+<span class="o">+</span> <span class="nf">geom_point</span><span class="p">()</span>
+<span class="n">p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-13-1.png">
+Let's weigh the points with the GDPcapitaUSD variable and change their shape to circles.</p>
+<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">combined2</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">PercentageFemGrad</span><span class="p">,</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">Score</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">GDPcapitaUSD</span><span class="p">))</span>
+  <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="m">21</span><span class="p">)</span>
+<span class="n">p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-14-1.png"></p>
+<p>Usually it's a good idea to have both axes begin at 0. Let's see what happens if we force the origin to start at 0.</p>
+<div class="highlight"><pre><span></span><span class="n">test_p</span> <span class="o">&lt;-</span> <span class="n">p</span> <span class="o">+</span> <span class="nf">expand_limits</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+<span class="n">test_p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-15-1.png"></p>
+<p>It's harder to see what's going on so we'll retain the earlier 'zoomed in' version of the plot. Let's see if there's any regional trend by basing the colour fill of the circles on the <em>Sub.region.Name</em> variable.</p>
+<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">combined2</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">PercentageFemGrad</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="n">Score</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">GDPcapitaUSD</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">Sub.region.Name</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="m">21</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="c1">#Add fill according to Sub.region.Name variable</span>
+<span class="c1">#Adjust transparency of circles&#39; fill</span>
+<span class="n">p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-16-1.png"></p>
+<p>It's not so easy to tell the regions apart so let's adjust the colours manually.</p>
+<div class="highlight"><pre><span></span><span class="n">fill</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Australia and New Zealand&quot;</span> <span class="o">=</span> <span class="s">&quot;#b4a8ab&quot;</span><span class="p">,</span><span class="s">&quot;Northern Africa&quot;</span> <span class="o">=</span><span class="s">&quot;#f4d16a&quot;</span><span class="p">,</span><span class="s">&quot;Sub-Saharan Africa&quot;</span> <span class="o">=</span> <span class="s">&quot;#fb7810&quot;</span><span class="p">,</span> <span class="s">&quot;Latin America and the Caribbean&quot;</span> <span class="o">=</span> <span class="s">&quot;#0ca82e&quot;</span><span class="p">,</span><span class="s">&quot;Northern America&quot;</span> <span class="o">=</span> <span class="s">&quot;#b1e632&quot;</span> <span class="p">,</span><span class="s">&quot;Eastern Europe&quot;</span> <span class="o">=</span> <span class="s">&quot;#7aa0d3&quot;</span><span class="p">,</span><span class="s">&quot;Southern Europe&quot;</span> <span class="o">=</span><span class="s">&quot;#72c8b8&quot;</span><span class="p">,</span><span class="s">&quot;Northern Europe&quot;</span> <span class="o">=</span> <span class="s">&quot;#35618f&quot;</span><span class="p">,</span> <span class="s">&quot;Western Europe&quot;</span> <span class="o">=</span><span class="s">&quot;#35c8ef&quot;</span><span class="p">,</span> <span class="s">&quot;Central Asia&quot;</span> <span class="o">=</span> <span class="s">&quot;#8a1c12&quot;</span><span class="p">,</span> <span class="s">&quot;Eastern Asia&quot;</span> <span class="o">=</span><span class="s">&quot;#8f68ff&quot;</span><span class="p">,</span> <span class="s">&quot;South-eastern Asia&quot;</span> <span class="o">=</span> <span class="s">&quot;#fd95e8&quot;</span><span class="p">,</span> <span class="s">&quot;Southern Asia&quot;</span> <span class="o">=</span> <span class="s">&quot;#e38473&quot;</span><span class="p">,</span> <span class="s">&quot;Western Asia&quot;</span> <span class="o">=</span><span class="s">&quot;#eb1241&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="n">p</span> <span class="o">+</span> <span class="nf">scale_fill_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">fill</span><span class="p">)</span>
+<span class="n">p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-17-1.png"></p>
+<p>For the finishing touches, we will edit the sizes, labels, and background themes.</p>
+<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">combined2</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">PercentageFemGrad</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="n">Score</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">GDPcapitaUSD</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">Sub.region.Name</span><span class="p">))</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="m">21</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="nf">scale_size_continuous</span><span class="p">(</span><span class="n">range</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">))</span> <span class="o">+</span>
+  <span class="c1">#Adjusts the range of the minimum and maximum point size</span>
+  <span class="nf">geom_text</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">subset</span><span class="p">(</span><span class="n">combined2</span><span class="p">,</span> <span class="n">PercentageFemGrad</span> <span class="o">&gt;</span> <span class="m">50</span> <span class="o">|</span> <span class="n">Score</span> <span class="o">&gt;</span> <span class="m">0.8</span> <span class="p">),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">Country.x</span><span class="p">),</span> <span class="n">family</span> <span class="o">=</span> <span class="s">&quot;Georgia&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">2</span> <span class="p">,</span> <span class="n">nudge_x</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">nudge_y</span> <span class="o">=</span> <span class="m">-0.015</span><span class="p">)</span> <span class="o">+</span>
+  <span class="c1">#Labels data points for countries where</span>
+  <span class="c1">#percentage of female graduates</span>
+  <span class="c1">#in STEM is more than 50% or score in Gender Gap index</span>
+  <span class="c1">#is greater than 0.8.</span>
+  <span class="c1">#Adjusts positions of labels.</span>
+  <span class="nf">theme_bw</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">theme</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;In more gender-equal countries, are women less likely to be in STEM?&quot;</span><span class="p">)</span><span class="o">+</span>
+  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Percentage of women among STEM college graduates&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span><span class="s">&quot;Gender Gap Index score&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="s">&quot;GDP per capita (current US$)&quot;</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&quot;Sub-regions&quot;</span><span class="p">)</span><span class="o">+</span>
+  <span class="nf">scale_fill_manual</span><span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="n">fill</span><span class="p">)</span><span class="o">+</span>
+    <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">legend.direction</span> <span class="o">=</span> <span class="s">&quot;horizontal&quot;</span><span class="p">,</span>
+              <span class="n">legend.box</span> <span class="o">=</span> <span class="s">&quot;vertical&quot;</span><span class="p">,</span>
+              <span class="n">legend.key.size</span> <span class="o">=</span> <span class="nf">unit</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="s">&quot;cm&quot;</span><span class="p">),</span>
+              <span class="n">plot.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s">&quot;Georgia&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span><span class="m">11</span><span class="p">),</span>
+              <span class="n">text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">family</span> <span class="o">=</span> <span class="s">&quot;Georgia&quot;</span><span class="p">),</span>
+              <span class="n">axis.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">8</span><span class="p">),</span>
+              <span class="n">legend.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">8</span><span class="p">),</span>
+              <span class="n">legend.title</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">face</span> <span class="o">=</span> <span class="s">&quot;bold&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">8</span><span class="p">))</span>
+<span class="n">p</span>
+</pre></div>
+
+
+<p><img alt="center" src="/images/v2_gender_gap/unnamed-chunk-18-1.png"></p>
+<h2>Some observations and thoughts</h2>
+<p>From the scatterplot, it's clear that Northern European countries, particularly, those in Scandinavia, gravitate towards a higher Gender Gap Index score and lower percentage of female STEM graduates while the inverse is true for West Asian countries (which include the Middle East).</p>
+<p>In the study, Stoet and Geary (the authors ) state that "life-quality pressures" in less gender-equal countries may be at play for a higher proportion of female engagement with STEM, suggesting that women may simply be less interested in STEM if they have a choice. Adam Mastroianni and Dakota McCoy posted on the <a href="https://blogs.scientificamerican.com/voices/countries-with-less-gender-equity-have-more-women-in-stem-huh/">Scientific American blog</a> that they disagree. For them, the answer had to do with (discriminatory) cultural attitudes toward women in STEM.</p>
+<p>I'm more inclined towards the latter view, and I think that in countries with greater gender inequality, there is less difference in the extent of cultural biases that women face being in STEM versus non-STEM. This, in turn, results in less of a barrier for women entering STEM.</p>
+<p>Back to the scatterplot, here's another interesting point: While a good number of countries that perform better on the Gender Gap Index tend to be wealthier as denoted by larger bubble sizes, there are much poorer countries performing just as well. These countries are from Sub-Saharan Africa.</p>
+<p>Feel free to check out my Tableau version of the scatterplot <a href="https://public.tableau.com/profile/alexandra2756#!/vizhome/Gender_gap_in_STEM/Dashboard1">here</a>.</p>
+      </div><!-- .entry-content -->
+      <br /><br />
+      <div class="article_meta">
+        Tags:
+          <a href="https://thedatacurious.github.io/tag/r.html">R</a>,          <a href="https://thedatacurious.github.io/tag/gender.html">gender</a>      </div>
+    </div>
+  </div>
+</article><!-- #post-## -->
+                </div>
+              </div><!-- #main -->
+          </div><!-- #primary -->
+        </div>
+      </div><!-- close .row -->
+    </div><!-- close .container -->
+  </div><!-- close .site-content -->
+
+
+
+
+  <div id="footer-area">
+    <footer id="colophon" class="site-footer" role="contentinfo">
+      <div class="site-info container">
+        <div class="row">
+                    <div class="copyright col-md-12">
+                   This site uses the <a href="https://github.com/limbenjamin/voce">voce</a> theme by <a href="//limbenjamin.com/">Benjamin Lim</a><br />
+                    &copy; 2020 <a href="https://thedatacurious.github.io">Alexandra Khoo</a> </div>
+        </div>
+      </div><!-- .site-info -->
+      <div class="scroll-to-top" style="display: none;"><i class="fa fa-angle-up"></i></div><!-- .scroll-to-top -->
+    </footer><!-- #colophon -->
+  </div>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+    if (window.location.pathname != '/' && window.location.pathname != '/index.html'){
+      window.scroll(0, document.getElementById('main').offsetTop);
+    }})
+  </script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+      var e = document.querySelectorAll(".email");
+      for (var i = 0; i < e.length; i++) {
+        var email = e[i].getAttribute("data-email")
+        var title = e[i].getAttribute("data-title")
+        if (email){
+          e[i].href = email.split("").reverse().join("");
+          e[i].removeAttribute("data-email");
+          e[i].removeAttribute("data-title");
+          e[i].removeAttribute("class");
+          if (title){
+            e[i].setAttribute("title", title);
+          }
+          else{
+            e[i].removeAttribute("title");
+          }
+        }
+      }
+    })
+  </script>
+
+
+
+</body>
+</html>
