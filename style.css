@@ -15,6 +15,7 @@ a:hover, .nav-link:hover{
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f4f4f4;
+  padding: 0 8%;
 }
 
 section{
@@ -22,6 +23,7 @@ section{
 }
 
 @media screen and (min-width:567px){
+
 div.grid-home {
   display:grid;
   grid-template-rows: auto 1fr 1fr auto auto auto auto;
@@ -33,13 +35,12 @@ div.grid-home {
   "talks"
   "story"
   "footer";
-  padding: 0 8%;
   }
 }
 
-div.grid-articles {
+/* div.grid-articles {
   padding: 0 8%;
-}
+} */
 
 /* .scroll{
   position:absolute;
@@ -97,8 +98,8 @@ nav {
 }
 
 .main-img{
-  max-width: 80%;
-  min-width: 320px;
+  max-width: 100%;
+  min-width: 400px;
 }
 
 
