@@ -21,6 +21,7 @@ section{
   padding: 4% 0;
 }
 
+@media screen and (min-width:567px){
 .grid-home {
   display:grid;
   grid-template-rows: auto 1fr 1fr auto auto auto auto;
@@ -33,6 +34,7 @@ section{
   "story"
   "footer";
   padding: 0 8%;
+  }
 }
 
 .grid-articles {
@@ -59,11 +61,9 @@ section{
   "card-synthesis";
 }
 
-@media only screen and (max-width: 767px){
-  body{width:100%;}
-}
 
-@media (min-width: 768px){
+
+@media screen and (min-width: 768px){
   .grid-home {
     display:grid;
     grid-template-rows: auto 90vh auto auto auto auto;
