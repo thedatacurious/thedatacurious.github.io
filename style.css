@@ -24,7 +24,6 @@ section{
 .grid-home {
   display:grid;
   grid-template-rows: auto 1fr 1fr auto auto auto auto;
-  grid-template-columns: repeat(auto-fill,1fr);
   grid-template-areas:
   "nav"
   "main-left"
@@ -33,17 +32,17 @@ section{
   "talks"
   "story"
   "footer";
-  padding: 0 2%;
+  padding: 0 8%;
 }
 
 .grid-articles {
-  padding: 0 4%;
+  padding: 0 8%;
 }
 
 .scroll{
-  position: absolute;
+  position:absolute;
   left: 50%;
-  bottom: 6%;
+  bottom: 5%;
   color:#FF686B;
   }
 
@@ -72,7 +71,6 @@ section{
     "talks talks"
     "story story"
     "footer footer";
-    padding: 0 4%;
   }
 }
 
@@ -96,10 +94,10 @@ nav {
 }
 
 .main-img{
-  display: grid;
-  max-width: 100%;
+  max-width: 80%;
   min-width: 320px;
 }
+
 
 .projects{
   grid-area: projects;
@@ -107,18 +105,15 @@ nav {
 
 .talks{
   grid-area: talks;
-  margin: auto 15%;
 }
 
 .story{
   grid-area: story;
-  margin: auto 15%;
 }
 
 .footer{
   grid-area: footer;
   text-align: center;
-  margin: auto 15%;
 }
 
 
@@ -139,10 +134,12 @@ h5 {
 }
 
 img.story {
-  display: grid;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 24%;
   min-width: 360px;
-  margin:auto;}
+}
 
 .btn {
   border-radius: 0px 0px 5px 5px;
@@ -159,10 +156,11 @@ img.story {
 
 .resume{
   display: flex;
-  margin:auto;
+  justify-content: center;
 }
+
 .btn.resume{
- border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
 }
 
 .card-container {
