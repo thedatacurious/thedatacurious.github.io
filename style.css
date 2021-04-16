@@ -41,12 +41,12 @@ section{
   padding: 0 8%;
 }
 
-.scroll{
+/* .scroll{
   position:absolute;
   left: 50%;
   bottom: 5%;
   color:#FF686B;
-  }
+  } */
 
 .grid-card{
   display:grid;
