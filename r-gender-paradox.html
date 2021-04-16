@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Alexandra Khoo</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/ico" href="media/logo.ico" >
+
+
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-okaidia.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,900|Ubuntu" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/390aa4c71f.js" crossorigin="anonymous"></script>
+
+ </head>
+
+<body>
+    <div class="grid-articles">
+    <!-- Nav bar -->
+    <nav class="navbar sticky-top navbar-expand-md navbar-light">
+
+      <a class="navbar-brand" href="index.html"><img src="media/logo.svg" alt="Logo" width="40"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#talks">Talks & More</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#story">My Story</a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+<section class="story">
+<h2>A gender-equality paradox in STEM?</h2>
+<p class ="text-muted">Date: 2018-10-07</p>
+<p>In countries that are more gender-equal, are women less likely to be in STEM? That&#39;s what psychologists Gijsbert Stoet, at Leeds Beckett University, and David Geary, at the University of Missouri, found in their 2018 <a href="http://journals.sagepub.com/doi/abs/10.1177/0956797617741719?journalCode=pssa">study</a>. They also found that girls performed similarly to or better than boys in science in two of every three countries.</p>
+<p>I will recreate their scatterplot of countries based on 1) the number of female STEM graduates and 2) the Gender Gap Index score, a measure of gender equality by the World Economic Forum. Let&#39;s also design the chart to show the countries&#39; GDP per capita and geographical groups to see if any patterns emerge.</p>
+<p><img src="https://cdn.theatlantic.com/assets/media/img/posts/2018/02/Screen_Shot_2018_02_16_at_12.33.16_PM/d099fa13a.png" alt="Scatterplot from the study"></p>
+<h5>Gather the data</h5>
+<p>In summary, the Gender Gap Index measures the level of gender equality across four dimensions: Economic Participation and Opportunity, Educational Attainment, Health and Survival, and Political Empowerment. The higher the score, the better a country is performing on that index.</p>
+<p>Get the Index data. It&#39;s from a World Economic Forum report (in pdf!) but fortunately, it&#39;s also available in csv format, courtesy of the World Bank. The csv data was only up to 2016 when accessed but it&#39;ll do. Go to the <a href="https://tcdata360.worldbank.org/indicators/af52ebe9?country=BRA&amp;indicator=27962&amp;viz=line_chart&amp;years=2006,2016#">World Bank webpage</a> to download the data.</p>
+<pre><code class="language-r"># install.packages(<span class="hljs-string">"dplyr"</span>) <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> yet installed
+<span class="hljs-function"><span class="hljs-title">library</span><span class="hljs-params">(dplyr)</span></span>
+</code></pre>
+<pre><code class="language-r">library(tidyr)
+# Read <span class="hljs-keyword">in</span> Gender Gap Index data
+genderindex &lt;- read.csv(<span class="hljs-string">"data.csv"</span>)
+</code></pre>
+<p>Data on percentage of female STEM graduates can be found at <a href="http://data.uis.unesco.org/Index.aspx?DataSetCode=EDULIT_DS">UNESCO&#39;s data portal on education</a>. In the left tab, select <em>Completion</em> &gt; <em>Percentage of tertiary graduates</em> &gt; <em>Percentage of female graduates by field of study</em>.</p>
+<p>Customise selection to <em>Percentage of graduates from Science, Technology , Engineering and Mathematics programmes in tertiary education who are female (%)</em> and load the data.</p>
+<pre><code class="language-r">femSTEM &lt;- <span class="hljs-keyword">read</span>.csv(<span class="hljs-string">"EDULIT_DS_06102018112127863.csv"</span>) # <span class="hljs-keyword">Read</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">STEM</span> percentage data. The <span class="hljs-keyword">file</span> name will differ based <span class="hljs-keyword">on</span> the date/time of loading.
+</code></pre>
+<p>Data on countries&#39; GDP per capita (current US dollars) can be found at <a href="http://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.CD?downloadformat=csv">another World Bank webpage</a></p>
+<p>The link loads a zipped folder but we can use the <em>unzip</em> function.</p>
+<p>The unzipped content includes some metadata files but only the main file is of interest.</p>
+<pre><code class="language-r"># <span class="hljs-keyword">Read</span> <span class="hljs-keyword">in</span> countries' GDP per capita data
+GDPcapita &lt;- <span class="hljs-keyword">read</span>.csv(<span class="hljs-string">"API_NY.GDP.PCAP.CD_DS2_en_csv_v2_10134337.csv"</span>, skip = 4)
+</code></pre>
+<p>For regional groupings, we will refer to the UN Statistics Division&#39;s <a href="https://unstats.un.org/unsd/methodology/m49/overview/#">methodology</a>. Click on the <em>language</em> tab of choice for options to load the data.</p>
+<pre><code class="language-r"># Read <span class="hljs-keyword">in</span> regional groupings data
+geogrp &lt;- read.csv(<span class="hljs-string">"UNSD — Methodology.csv"</span>)
+</code></pre>
+<h5>Preview and clean the data</h5>
+<p>A quick look at <em>genderindex</em> shows that besides the Gender Gap Index, subindices that compose this overall index are also included in the dataset. We&#39;re only interested in countries&#39; overall index scores so we&#39;ll create a new dataframe with the relevant subset in a series of steps.</p>
+<pre><code class="language-r"><span class="hljs-function"><span class="hljs-title">str</span><span class="hljs-params">(genderindex)</span></span>
+</code></pre>
+<pre><code class="language-r">## <span class="hljs-string">'data.frame'</span>:    <span class="hljs-number">1885</span> obs. <span class="hljs-keyword">of</span>  <span class="hljs-number">15</span> variables:
+##  $ Country.ISO3     : Factor w/ <span class="hljs-number">148</span> levels <span class="hljs-string">"AGO"</span>,<span class="hljs-string">"ALB"</span>,<span class="hljs-string">"ARE"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ Country.Name     : Factor w/ <span class="hljs-number">148</span> levels <span class="hljs-string">"Albania"</span>,<span class="hljs-string">"Algeria"</span>,..: <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> ...
+##  $ Indicator        : Factor w/ <span class="hljs-number">6</span> levels <span class="hljs-string">"Global Gender Gap Economic Participation and Opportunity Subindex"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span> ...
+##  $ Subindicator.Type: Factor w/ <span class="hljs-number">4</span> levels <span class="hljs-string">"Index"</span>,<span class="hljs-string">"Normalized Score"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span> ...
+##  $ X2006            : num  <span class="hljs-number">0.587</span> <span class="hljs-number">69</span> <span class="hljs-number">0.779</span> <span class="hljs-number">107</span> <span class="hljs-number">0.98</span> ...
+##  $ X2007            : num  <span class="hljs-number">0.585</span> <span class="hljs-number">87</span> <span class="hljs-number">0.779</span> <span class="hljs-number">119</span> <span class="hljs-number">0.98</span> ...
+##  $ X2008            : num  <span class="hljs-number">0.584</span> <span class="hljs-number">87</span> <span class="hljs-number">0.778</span> <span class="hljs-number">122</span> <span class="hljs-number">0.98</span> ...
+##  $ X2009            : num  <span class="hljs-number">0.583</span> <span class="hljs-number">96</span> <span class="hljs-number">0.778</span> <span class="hljs-number">127</span> <span class="hljs-number">0.98</span> ...
+##  $ X2010            : num  <span class="hljs-number">0.63</span> <span class="hljs-number">76</span> <span class="hljs-number">0.785</span> <span class="hljs-number">125</span> <span class="hljs-number">0.98</span> ...
+##  $ X2011            : num  <span class="hljs-number">0.594</span> <span class="hljs-number">96</span> <span class="hljs-number">0.786</span> <span class="hljs-number">126</span> <span class="hljs-number">0.98</span> ...
+##  $ X2012            : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ X2013            : num  <span class="hljs-number">0.616</span> <span class="hljs-number">92</span> <span class="hljs-number">0.806</span> <span class="hljs-number">127</span> <span class="hljs-number">0.98</span> ...
+##  $ X2014            : num  <span class="hljs-number">0.588</span> <span class="hljs-number">111</span> <span class="hljs-number">0.721</span> <span class="hljs-number">138</span> <span class="hljs-number">0.975</span> ...
+##  $ X2015            : num  <span class="hljs-number">0.59</span> <span class="hljs-number">116</span> <span class="hljs-number">0.726</span> <span class="hljs-number">141</span> <span class="hljs-number">0.98</span> <span class="hljs-number">1</span> <span class="hljs-number">0.251</span> <span class="hljs-number">38</span> <span class="hljs-number">0.637</span> <span class="hljs-number">126</span> ...
+##  $ X2016            : num  <span class="hljs-number">0.565</span> <span class="hljs-number">120</span> <span class="hljs-number">0.778</span> <span class="hljs-number">138</span> <span class="hljs-number">0.98</span> <span class="hljs-number">1</span> <span class="hljs-number">0.251</span> <span class="hljs-number">40</span> <span class="hljs-number">0.643</span> <span class="hljs-number">117</span> ...
+</code></pre><pre><code class="language-r"> #Reshape the data <span class="hljs-keyword">from</span> <span class="hljs-string">'wide'</span> to <span class="hljs-string">'long'</span> form
+ #Select rows that meet conditions
+genderindex2 &lt;- genderindex %&gt;% gather(Year, Score, X2006:X2016) %&gt;% subset(Indicator == <span class="hljs-string">"Overall Global Gender Gap Index"</span> &amp; Subindicator.Type == <span class="hljs-string">"Index"</span>)
+#Keep only columns <span class="hljs-keyword">of</span> interest
+genderindex2 &lt;- genderindex2[, c(<span class="hljs-string">"Country.Name"</span>, <span class="hljs-string">"Country.ISO3"</span>,<span class="hljs-string">"Year"</span>,<span class="hljs-string">"Score"</span>)]
+ # Rename  variables to keep things tidier
+genderindex2 &lt;- rename(genderindex2, Country = Country.Name, Code = Country.ISO3)
+# Use regrex to remove the <span class="hljs-string">'x'</span> <span class="hljs-keyword">in</span> front <span class="hljs-keyword">of</span> the year
+genderindex2$Year &lt;- sub(<span class="hljs-string">"^."</span>,<span class="hljs-string">""</span>,genderindex2$Year)
+</code></pre>
+<p>Now let&#39;s do the same for <em>femSTEM</em>.</p>
+<pre><code class="language-r"><span class="hljs-function"><span class="hljs-title">str</span><span class="hljs-params">(femSTEM)</span></span>
+</code></pre>
+<pre><code class="language-r">## <span class="hljs-string">'data.frame'</span>:    <span class="hljs-number">369</span> obs. <span class="hljs-keyword">of</span>  <span class="hljs-number">9</span> variables:
+##  $ EDULIT_IND: Factor w/ <span class="hljs-number">1</span> level <span class="hljs-string">"FGP_5T8_F500600700"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ Indicator : Factor w/ <span class="hljs-number">1</span> level <span class="hljs-string">"Percentage of graduates from Science, Technology , Engineering and Mathematics programmes in tertiary education"</span>| __truncated__: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ LOCATION  : Factor w/ <span class="hljs-number">126</span> levels <span class="hljs-string">"ABW"</span>,<span class="hljs-string">"AGO"</span>,<span class="hljs-string">"ALB"</span>,..: <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span> <span class="hljs-number">13</span> <span class="hljs-number">13</span> <span class="hljs-number">13</span> <span class="hljs-number">13</span> ...
+##  $ Country   : Factor w/ <span class="hljs-number">126</span> levels <span class="hljs-string">"Albania"</span>,<span class="hljs-string">"Algeria"</span>,..: <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span> <span class="hljs-number">10</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> ...
+##  $ TIME      : int  <span class="hljs-number">2013</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> <span class="hljs-number">2016</span> <span class="hljs-number">2012</span> <span class="hljs-number">2013</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> ...
+##  $ Time      : int  <span class="hljs-number">2013</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> <span class="hljs-number">2016</span> <span class="hljs-number">2012</span> <span class="hljs-number">2013</span> <span class="hljs-number">2014</span> <span class="hljs-number">2015</span> ...
+##  $ Value     : num  <span class="hljs-number">30.7</span> <span class="hljs-number">31</span> <span class="hljs-number">31.7</span> <span class="hljs-number">26.1</span> <span class="hljs-number">25.3</span> ...
+##  $ Flag.Codes: Factor w/ <span class="hljs-number">4</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"+"</span>,<span class="hljs-string">"a"</span>,<span class="hljs-string">"n"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ Flags     : Factor w/ <span class="hljs-number">4</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Category not applicable"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+</code></pre><pre><code class="language-r">femSTEM2 &lt;- femSTEM[, c(<span class="hljs-string">"LOCATION"</span>, <span class="hljs-string">"Country"</span>,
+<span class="hljs-string">"Time"</span>, <span class="hljs-string">"Value"</span>)]
+femSTEM2 &lt;- rename(femSTEM2, <span class="hljs-built_in">Code</span> = LOCATION,
+  <span class="hljs-built_in">Year</span> = <span class="hljs-built_in">Time</span>, PercentageFemGrad = <span class="hljs-built_in">Value</span>)
+femSTEM2$<span class="hljs-built_in">Year</span> &lt;- as.character.Date(femSTEM2$<span class="hljs-built_in">Year</span>)
+</code></pre>
+<p>Likewise for GDPcapita...</p>
+<pre><code class="language-r"><span class="hljs-function"><span class="hljs-title">str</span><span class="hljs-params">(GDPcapita)</span></span>
+</code></pre>
+<pre><code class="language-r">## <span class="hljs-string">'data.frame'</span>:    <span class="hljs-number">264</span> obs. <span class="hljs-keyword">of</span>  <span class="hljs-number">63</span> variables:
+##  $ Country.Name  : Factor w/ <span class="hljs-number">264</span> levels <span class="hljs-string">"Afghanistan"</span>,..: <span class="hljs-number">11</span> <span class="hljs-number">1</span> <span class="hljs-number">6</span> <span class="hljs-number">2</span> <span class="hljs-number">5</span> <span class="hljs-number">8</span> <span class="hljs-number">250</span> <span class="hljs-number">9</span> <span class="hljs-number">10</span> <span class="hljs-number">4</span> ...
+##  $ Country.Code  : Factor w/ <span class="hljs-number">264</span> levels <span class="hljs-string">"ABW"</span>,<span class="hljs-string">"AFG"</span>,<span class="hljs-string">"AGO"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span> <span class="hljs-number">7</span> <span class="hljs-number">8</span> <span class="hljs-number">9</span> <span class="hljs-number">10</span> ...
+##  $ Indicator.Name: Factor w/ <span class="hljs-number">1</span> level <span class="hljs-string">"GDP per capita (current US$)"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ Indicator.Code: Factor w/ <span class="hljs-number">1</span> level <span class="hljs-string">"NY.GDP.PCAP.CD"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ X1960         : num  NA <span class="hljs-number">59.8</span> NA NA NA ...
+##  $ X1961         : num  NA <span class="hljs-number">59.9</span> NA NA NA ...
+##  $ X1962         : num  NA <span class="hljs-number">58.5</span> NA NA NA ...
+##  $ X1963         : num  NA <span class="hljs-number">78.8</span> NA NA NA ...
+##  $ X1964         : num  NA <span class="hljs-number">82.2</span> NA NA NA ...
+##  $ X1965         : num  NA <span class="hljs-number">101</span> NA NA NA ...
+##  $ X1966         : num  NA <span class="hljs-number">138</span> NA NA NA ...
+##  $ X1967         : num  NA <span class="hljs-number">161</span> NA NA NA ...
+##  $ X1968         : num  NA <span class="hljs-number">130</span> NA NA NA ...
+##  $ X1969         : num  NA <span class="hljs-number">130</span> NA NA NA ...
+##  $ X1970         : num  NA <span class="hljs-number">157</span> NA NA <span class="hljs-number">3239</span> ...
+##  $ X1971         : num  NA <span class="hljs-number">160</span> NA NA <span class="hljs-number">3498</span> ...
+##  $ X1972         : num  NA <span class="hljs-number">136</span> NA NA <span class="hljs-number">4217</span> ...
+##  $ X1973         : num  NA <span class="hljs-number">144</span> NA NA <span class="hljs-number">5342</span> ...
+##  $ X1974         : num  NA <span class="hljs-number">175</span> NA NA <span class="hljs-number">6320</span> ...
+##  $ X1975         : num  NA <span class="hljs-number">188</span> NA NA <span class="hljs-number">7169</span> ...
+##  $ X1976         : num  NA <span class="hljs-number">199</span> NA NA <span class="hljs-number">7152</span> ...
+##  $ X1977         : num  NA <span class="hljs-number">226</span> NA NA <span class="hljs-number">7751</span> ...
+##  $ X1978         : num  NA <span class="hljs-number">249</span> NA NA <span class="hljs-number">9130</span> ...
+##  $ X1979         : num  NA <span class="hljs-number">278</span> NA NA <span class="hljs-number">11821</span> ...
+##  $ X1980         : num  NA <span class="hljs-number">275</span> <span class="hljs-number">664</span> NA <span class="hljs-number">12377</span> ...
+##  $ X1981         : num  NA <span class="hljs-number">266</span> <span class="hljs-number">600</span> NA <span class="hljs-number">10372</span> ...
+##  $ X1982         : num  NA NA <span class="hljs-number">579</span> NA <span class="hljs-number">9610</span> ...
+##  $ X1983         : num  NA NA <span class="hljs-number">582</span> NA <span class="hljs-number">8023</span> ...
+##  $ X1984         : num  NA NA <span class="hljs-number">597</span> <span class="hljs-number">663</span> <span class="hljs-number">7729</span> ...
+##  $ X1985         : num  NA NA <span class="hljs-number">712</span> <span class="hljs-number">663</span> <span class="hljs-number">7774</span> ...
+##  $ X1986         : num  NA NA <span class="hljs-number">648</span> <span class="hljs-number">719</span> <span class="hljs-number">10362</span> ...
+##  $ X1987         : num  NA NA <span class="hljs-number">721</span> <span class="hljs-number">699</span> <span class="hljs-number">12616</span> ...
+##  $ X1988         : num  NA NA <span class="hljs-number">762</span> <span class="hljs-number">677</span> <span class="hljs-number">14304</span> ...
+##  $ X1989         : num  NA NA <span class="hljs-number">863</span> <span class="hljs-number">723</span> <span class="hljs-number">15166</span> ...
+##  $ X1990         : num  NA NA <span class="hljs-number">923</span> <span class="hljs-number">639</span> <span class="hljs-number">18879</span> ...
+##  $ X1991         : num  NA NA <span class="hljs-number">845</span> <span class="hljs-number">349</span> <span class="hljs-number">19533</span> ...
+##  $ X1992         : num  NA NA <span class="hljs-number">641</span> <span class="hljs-number">218</span> <span class="hljs-number">20548</span> ...
+##  $ X1993         : num  NA NA <span class="hljs-number">430</span> <span class="hljs-number">381</span> <span class="hljs-number">16516</span> ...
+##  $ X1994         : num  <span class="hljs-number">17342</span> NA <span class="hljs-number">321</span> <span class="hljs-number">619</span> <span class="hljs-number">16235</span> ...
+##  $ X1995         : num  <span class="hljs-number">16442</span> NA <span class="hljs-number">388</span> <span class="hljs-number">761</span> <span class="hljs-number">18461</span> ...
+##  $ X1996         : num  <span class="hljs-number">16585</span> NA <span class="hljs-number">513</span> <span class="hljs-number">1046</span> <span class="hljs-number">19017</span> ...
+##  $ X1997         : num  <span class="hljs-number">17927</span> NA <span class="hljs-number">507</span> <span class="hljs-number">750</span> <span class="hljs-number">18353</span> ...
+##  $ X1998         : num  <span class="hljs-number">19081</span> NA <span class="hljs-number">420</span> <span class="hljs-number">865</span> <span class="hljs-number">18895</span> ...
+##  $ X1999         : num  <span class="hljs-number">19356</span> NA <span class="hljs-number">386</span> <span class="hljs-number">1098</span> <span class="hljs-number">19262</span> ...
+##  $ X2000         : num  <span class="hljs-number">20621</span> NA <span class="hljs-number">555</span> <span class="hljs-number">1176</span> <span class="hljs-number">21937</span> ...
+##  $ X2001         : num  <span class="hljs-number">20671</span> <span class="hljs-number">117</span> <span class="hljs-number">526</span> <span class="hljs-number">1327</span> <span class="hljs-number">22229</span> ...
+##  $ X2002         : num  <span class="hljs-number">20434</span> <span class="hljs-number">188</span> <span class="hljs-number">711</span> <span class="hljs-number">1454</span> <span class="hljs-number">24741</span> ...
+##  $ X2003         : num  <span class="hljs-number">20835</span> <span class="hljs-number">199</span> <span class="hljs-number">779</span> <span class="hljs-number">1891</span> <span class="hljs-number">32776</span> ...
+##  $ X2004         : num  <span class="hljs-number">22568</span> <span class="hljs-number">219</span> <span class="hljs-number">1041</span> <span class="hljs-number">2417</span> <span class="hljs-number">38503</span> ...
+##  $ X2005         : num  <span class="hljs-number">23303</span> <span class="hljs-number">250</span> <span class="hljs-number">1444</span> <span class="hljs-number">2709</span> <span class="hljs-number">41282</span> ...
+##  $ X2006         : num  <span class="hljs-number">24015</span> <span class="hljs-number">273</span> <span class="hljs-number">2062</span> <span class="hljs-number">3005</span> <span class="hljs-number">43749</span> ...
+##  $ X2007         : num  <span class="hljs-number">25921</span> <span class="hljs-number">370</span> <span class="hljs-number">2879</span> <span class="hljs-number">3603</span> <span class="hljs-number">48583</span> ...
+##  $ X2008         : num  <span class="hljs-number">27547</span> <span class="hljs-number">373</span> <span class="hljs-number">3869</span> <span class="hljs-number">4371</span> <span class="hljs-number">47786</span> ...
+##  $ X2009         : num  <span class="hljs-number">24631</span> <span class="hljs-number">446</span> <span class="hljs-number">3348</span> <span class="hljs-number">4114</span> <span class="hljs-number">43339</span> ...
+##  $ X2010         : num  <span class="hljs-number">24272</span> <span class="hljs-number">553</span> <span class="hljs-number">3531</span> <span class="hljs-number">4094</span> <span class="hljs-number">39736</span> ...
+##  $ X2011         : num  <span class="hljs-number">25325</span> <span class="hljs-number">604</span> <span class="hljs-number">4299</span> <span class="hljs-number">4437</span> <span class="hljs-number">41099</span> ...
+##  $ X2012         : num  NA <span class="hljs-number">669</span> <span class="hljs-number">4539</span> <span class="hljs-number">4248</span> <span class="hljs-number">38391</span> ...
+##  $ X2013         : num  NA <span class="hljs-number">639</span> <span class="hljs-number">4805</span> <span class="hljs-number">4413</span> <span class="hljs-number">40620</span> ...
+##  $ X2014         : num  NA <span class="hljs-number">629</span> <span class="hljs-number">4708</span> <span class="hljs-number">4579</span> <span class="hljs-number">42295</span> ...
+##  $ X2015         : num  NA <span class="hljs-number">570</span> <span class="hljs-number">3684</span> <span class="hljs-number">3953</span> <span class="hljs-number">36038</span> ...
+##  $ X2016         : num  NA <span class="hljs-number">562</span> <span class="hljs-number">3309</span> <span class="hljs-number">4132</span> <span class="hljs-number">37232</span> ...
+##  $ X2017         : num  NA <span class="hljs-number">586</span> <span class="hljs-number">4170</span> <span class="hljs-number">4538</span> <span class="hljs-number">39147</span> ...
+##  $ X             : logi  NA NA NA NA NA NA ...
+</code></pre><pre><code class="language-r">GDPcapita2 &lt;- GDPcapita %&gt;%
+gather(Year, GDPcapitaUSD, X1960:X2017) %&gt;%
+rename(Country = Country.Name, Code = Country.Code)
+GDPcapita2 &lt;- GDPcapita2[, c(<span class="hljs-string">"Country"</span>, <span class="hljs-string">"Code"</span>, <span class="hljs-string">"GDPcapitaUSD"</span>,<span class="hljs-string">"Year"</span>)]
+# Use regrex to remove the <span class="hljs-string">'x'</span> <span class="hljs-keyword">in</span> front <span class="hljs-keyword">of</span> the year
+GDPcapita2$Year &lt;- sub(<span class="hljs-string">"^."</span>,<span class="hljs-string">""</span>,GDPcapita2$Year)
+</code></pre>
+<p>...as well as for geogrp. It looks like no change is required except a little renaming for consistency.</p>
+<pre><code class="language-r"><span class="hljs-function"><span class="hljs-title">str</span><span class="hljs-params">(geogrp)</span></span>
+</code></pre>
+<pre><code class="language-r">## <span class="hljs-string">'data.frame'</span>:    <span class="hljs-number">252</span> obs. <span class="hljs-keyword">of</span>  <span class="hljs-number">15</span> variables:
+##  $ Global.Code                            : Factor w/ <span class="hljs-number">2</span> levels <span class="hljs-string">"001"</span>,<span class="hljs-string">"Developing"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> ...
+##  $ Global.Name                            : Factor w/ <span class="hljs-number">2</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"World"</span>: <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> ...
+##  $ Region.Code                            : int  <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> ...
+##  $ Region.Name                            : Factor w/ <span class="hljs-number">6</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Africa"</span>,<span class="hljs-string">"Americas"</span>,..: <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span> ...
+##  $ Sub.region.Code                        : int  <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">15</span> <span class="hljs-number">202</span> <span class="hljs-number">202</span> <span class="hljs-number">202</span> ...
+##  $ Sub.region.Name                        : Factor w/ <span class="hljs-number">18</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Australia and New Zealand"</span>,..: <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">9</span> <span class="hljs-number">16</span> <span class="hljs-number">16</span> <span class="hljs-number">16</span> ...
+##  $ Intermediate.Region.Code               : int  NA NA NA NA NA NA NA <span class="hljs-number">14</span> <span class="hljs-number">14</span> <span class="hljs-number">14</span> ...
+##  $ Intermediate.Region.Name               : Factor w/ <span class="hljs-number">9</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Caribbean"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span> ...
+##  $ Country.or.Area                        : Factor w/ <span class="hljs-number">248</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Afghanistan"</span>,..: <span class="hljs-number">5</span> <span class="hljs-number">69</span> <span class="hljs-number">128</span> <span class="hljs-number">149</span> <span class="hljs-number">212</span> <span class="hljs-number">226</span> <span class="hljs-number">245</span> <span class="hljs-number">34</span> <span class="hljs-number">39</span> <span class="hljs-number">52</span> ...
+##  $ M49.Code                               : Factor w/ <span class="hljs-number">250</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"004"</span>,<span class="hljs-string">"008"</span>,..: <span class="hljs-number">5</span> <span class="hljs-number">232</span> <span class="hljs-number">124</span> <span class="hljs-number">143</span> <span class="hljs-number">209</span> <span class="hljs-number">224</span> <span class="hljs-number">210</span> <span class="hljs-number">28</span> <span class="hljs-number">34</span> <span class="hljs-number">49</span> ...
+##  $ ISO.alpha3.Code                        : Factor w/ <span class="hljs-number">249</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"344"</span>,<span class="hljs-string">"446"</span>,..: <span class="hljs-number">68</span> <span class="hljs-number">70</span> <span class="hljs-number">130</span> <span class="hljs-number">139</span> <span class="hljs-number">194</span> <span class="hljs-number">227</span> <span class="hljs-number">72</span> <span class="hljs-number">108</span> <span class="hljs-number">22</span> <span class="hljs-number">54</span> ...
+##  $ Least.Developed.Countries..LDC.        : Factor w/ <span class="hljs-number">5</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"BES"</span>,<span class="hljs-string">"HKG"</span>,..: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">5</span> <span class="hljs-number">5</span> ...
+##  $ Land.Locked.Developing.Countries..LLDC.: Factor w/ <span class="hljs-number">2</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"x"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span> ...
+##  $ Small.Island.Developing.States..SIDS.  : Factor w/ <span class="hljs-number">2</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"x"</span>: <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> ...
+##  $ Developed...Developing.Countries       : Factor w/ <span class="hljs-number">4</span> levels <span class="hljs-string">""</span>,<span class="hljs-string">"Developed"</span>,..: <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> <span class="hljs-number">3</span> ...
+</code></pre>
+<pre><code class="language-r">geogrp &lt;- rename(geogrp, Code = ISO<span class="hljs-selector-class">.alpha3</span><span class="hljs-selector-class">.Code</span>)
+</code></pre>
+<p>The latest data we downloaded on the Gender Gap Index was for 2016 so let&#39;s try to merge the datasets for that year. A check on the available data for 2016 indicate we should ideally have 85 matches. However, we only got 80 matches.</p>
+<pre><code class="language-r">femSTEM3 &lt;- femSTEM2 <span class="hljs-variable">%&gt;%</span> subset(Year == <span class="hljs-string">"2016"</span>) <span class="hljs-variable">%&gt;%</span> na.omit(femSTEM2)
+genderindex3 &lt;- genderindex2 <span class="hljs-variable">%&gt;%</span> subset(Year == <span class="hljs-string">"2016"</span>) <span class="hljs-variable">%&gt;%</span> na.omit(genderindex2)
+nrow(femSTEM3)
+</code></pre>
+<pre><code class="language-r">## [<span class="hljs-number">1</span>] <span class="hljs-number">85</span>
+</code></pre><pre><code class="language-r"><span class="hljs-function"><span class="hljs-title">nrow</span><span class="hljs-params">(genderindex3)</span></span>
+</code></pre>
+<pre><code class="language-r">## [<span class="hljs-number">1</span>] <span class="hljs-number">144</span>
+</code></pre><pre><code class="language-r">combined &lt;- merge(<span class="hljs-name">femSTEM3</span>, genderindex3, by = <span class="hljs-string">"Code"</span>)
+nrow(<span class="hljs-name">combined</span>)
+</code></pre>
+<pre><code class="language-r">## [<span class="hljs-number">1</span>] <span class="hljs-number">80</span>
+</code></pre><p>Use the <em>merge</em> function again to identify the countries that got dropped (i.e. Gender Gap Index did not have data on these countries, at least for the year 2016).</p>
+<pre><code class="language-r"><span class="hljs-keyword">test </span>&lt;- merge(femSTEM3, combined, by = "Code", all.x = TRUE)
+<span class="hljs-keyword">test </span>&lt;- subset(test, is.na(Score))
+test$Country
+</code></pre>
+<pre><code class="language-r">## [<span class="hljs-number">1</span>] Democratic Republic <span class="hljs-keyword">of</span> the Congo
+## [<span class="hljs-number">2</span>] Eritrea
+## [<span class="hljs-number">3</span>] China, Macao Special Administrative Region
+## [<span class="hljs-number">4</span>] Palestine
+## [<span class="hljs-number">5</span>] Seychelles
+## <span class="hljs-number">126</span> Levels: Albania Algeria Andorra Angola ... Zimbabwe
+</code></pre><pre><code class="language-r">GDPcapita3 &lt;- subset(<span class="hljs-name">GDPcapita2</span>, Year == <span class="hljs-string">"2016"</span> &amp; !is.na(<span class="hljs-name">GDPcapitaUSD</span>))
+combined2 &lt;- Reduce(<span class="hljs-name">function</span>(...) merge(..., by= c(<span class="hljs-string">"Code"</span>)), list(<span class="hljs-name">femSTEM3</span>, genderindex3,GDPcapita3,geogrp))
+#Use Reduce function to merge more than <span class="hljs-number">2</span> dataframes simultaneously
+</code></pre>
+<h5>Visualize the data</h5>
+<p>Let&#39;s start with a basic scatterplot. This <a href="http://t-redactyl.io/blog/2016/02/creating-plots-in-r-using-ggplot2-part-6-weighted-scatterplots.html">ggplot tutorial</a> by Jodie Burchell and Mauricio Vargas Sepúlveda is a major help.</p>
+<pre><code class="language-r">library(<span class="hljs-name">ggplot2</span>)
+p &lt;- ggplot(<span class="hljs-name">combined2</span>, aes(<span class="hljs-name">x=</span> PercentageFemGrad, y =Score))
++ geom_point()
+p
+</code></pre>
+<img src="./media/r_gender_paradox/unnamed-chunk-13-1.png" alt="Screenshot of graph">
+<p>
+Let&#39;s weigh the points with the GDPcapitaUSD variable and change their shape to circles.</p>
+<pre><code class="language-r">p &lt;- ggplot(<span class="hljs-name">combined2</span>, aes(<span class="hljs-name">x=</span> PercentageFemGrad,
+  y = Score, size = GDPcapitaUSD))
+  + geom_point(<span class="hljs-name">shape</span> = <span class="hljs-number">21</span>)
+p
+</code></pre>
+<p><img src="./media/r_gender_paradox/unnamed-chunk-14-1.png" alt="Screenshot of graph"></p>
+<p>Usually it&#39;s a good idea to have both axes begin at 0. Let&#39;s see what happens if we force the origin to start at 0.</p>
+<pre><code class="language-r">test_p <span class="hljs-tag">&lt;<span class="hljs-name">-</span> <span class="hljs-attr">p</span> + <span class="hljs-attr">expand_limits</span>(<span class="hljs-attr">x</span> = <span class="hljs-string">0,</span> <span class="hljs-attr">y</span> = <span class="hljs-string">0)</span>
+<span class="hljs-attr">test_p</span></span>
+</code></pre>
+<p><img src="./media/r_gender_paradox/unnamed-chunk-15-1.png" alt="Screenshot of graph"></p>
+<p>It&#39;s harder to see what&#39;s going on so we&#39;ll retain the earlier &#39;zoomed in&#39; version of the plot. Let&#39;s see if there&#39;s any regional trend by basing the colour fill of the circles on the <em>Sub.region.Name</em> variable.</p>
+<pre><code class="language-r">p &lt;- ggplot(combined2, aes(x= PercentageFemGrad, y =Score, size = GDPcapitaUSD,<span class="hljs-built_in"> fill </span>= Sub.region.Name)) + geom_point(shape = 21, alpha = 0.5)
+<span class="hljs-comment">#Add fill according to Sub.region.Name variable</span>
+<span class="hljs-comment">#Adjust transparency of circles' fill</span>
+p
+</code></pre>
+<p><img src="./media/r_gender_paradox/unnamed-chunk-16-1.png" alt="Screenshot of graph"></p>
+<p>It&#39;s not so easy to tell the regions apart so let&#39;s adjust the colours manually.</p>
+<pre><code class="language-r">fill = c(<span class="hljs-string">"Australia and New Zealand"</span> = <span class="hljs-string">"<span class="hljs-subst">#b4a8ab</span>"</span>,<span class="hljs-string">"Northern Africa"</span> =<span class="hljs-string">"<span class="hljs-subst">#f4d16a</span>"</span>,<span class="hljs-string">"Sub-Saharan Africa"</span> = <span class="hljs-string">"<span class="hljs-subst">#fb7810</span>"</span>, <span class="hljs-string">"Latin America and the Caribbean"</span> = <span class="hljs-string">"#0ca82e"</span>,<span class="hljs-string">"Northern America"</span> = <span class="hljs-string">"<span class="hljs-subst">#b1e632</span>"</span> ,<span class="hljs-string">"Eastern Europe"</span> = <span class="hljs-string">"#7aa0d3"</span>,<span class="hljs-string">"Southern Europe"</span> =<span class="hljs-string">"#72c8b8"</span>,<span class="hljs-string">"Northern Europe"</span> = <span class="hljs-string">"#35618f"</span>, <span class="hljs-string">"Western Europe"</span> =<span class="hljs-string">"#35c8ef"</span>, <span class="hljs-string">"Central Asia"</span> = <span class="hljs-string">"#8a1c12"</span>, <span class="hljs-string">"Eastern Asia"</span> =<span class="hljs-string">"#8f68ff"</span>, <span class="hljs-string">"South-eastern Asia"</span> = <span class="hljs-string">"<span class="hljs-subst">#fd95e8</span>"</span>, <span class="hljs-string">"Southern Asia"</span> = <span class="hljs-string">"<span class="hljs-subst">#e38473</span>"</span>, <span class="hljs-string">"Western Asia"</span> =<span class="hljs-string">"<span class="hljs-subst">#eb1241</span>"</span>)
+p &lt;- p + scale_fill_manual(values = fill)
+p
+</code></pre>
+<p><img src="./media/r_gender_paradox/unnamed-chunk-17-1.png" alt="Screenshot of graph"></p>
+<p>For the finishing touches, we will edit the sizes, labels, and background themes.</p>
+<pre><code class="language-r">p &lt;- ggplot(combined2, aes(<span class="hljs-attr">x=</span> PercentageFemGrad, <span class="hljs-attr">y</span> =Score, <span class="hljs-attr">size</span> = GDPcapitaUSD, <span class="hljs-attr">fill</span> = Sub.region.Name)) + geom_point(<span class="hljs-attr">shape</span> = <span class="hljs-number">21</span>, <span class="hljs-attr">alpha</span> = <span class="hljs-number">0.5</span>) + scale_size_continuous(<span class="hljs-attr">range</span> = c(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)) +
+  <span class="hljs-comment">#Adjusts the range of the minimum and maximum point size</span>
+  geom_text(<span class="hljs-attr">data</span> = subset(combined2, PercentageFemGrad &gt; <span class="hljs-number">50</span> | Score &gt; <span class="hljs-number">0.8</span> ), aes(<span class="hljs-attr">label</span> = Country.x), <span class="hljs-attr">family</span> = <span class="hljs-string">"Georgia"</span>, <span class="hljs-attr">size</span> = <span class="hljs-number">2</span> , <span class="hljs-attr">nudge_x</span> = <span class="hljs-number">0.01</span>, <span class="hljs-attr">nudge_y</span> = -<span class="hljs-number">0.015</span>) +
+  <span class="hljs-comment">#Labels data points for countries where</span>
+  <span class="hljs-comment">#percentage of female graduates</span>
+  <span class="hljs-comment">#in STEM is more than 50% or score in Gender Gap index</span>
+  <span class="hljs-comment">#is greater than 0.8.</span>
+  <span class="hljs-comment">#Adjusts positions of labels.</span>
+  theme_bw() +
+  theme() +
+  ggtitle(<span class="hljs-string">"In more gender-equal countries, are women less likely to be in STEM?"</span>)+
+  labs(<span class="hljs-attr">x</span> = <span class="hljs-string">"Percentage of women among STEM college graduates"</span>, <span class="hljs-attr">y</span> =<span class="hljs-string">"Gender Gap Index score"</span>, <span class="hljs-attr">size</span> = <span class="hljs-string">"GDP per capita (current US$)"</span>, <span class="hljs-attr">fill</span> = <span class="hljs-string">"Sub-regions"</span>)+
+  scale_fill_manual(<span class="hljs-attr">values</span> = fill)+
+    theme(legend.<span class="hljs-attr">position</span> = <span class="hljs-string">"bottom"</span>, legend.<span class="hljs-attr">direction</span> = <span class="hljs-string">"horizontal"</span>,
+              legend.<span class="hljs-attr">box</span> = <span class="hljs-string">"vertical"</span>,
+              legend.key.<span class="hljs-attr">size</span> = unit(<span class="hljs-number">0.5</span>, <span class="hljs-string">"cm"</span>),
+              plot.<span class="hljs-attr">title</span> = element_text(<span class="hljs-attr">family="Georgia",</span> <span class="hljs-attr">size</span> =<span class="hljs-number">11</span>),
+              <span class="hljs-attr">text</span> = element_text(<span class="hljs-attr">family</span> = <span class="hljs-string">"Georgia"</span>),
+              axis.<span class="hljs-attr">title</span> = element_text(<span class="hljs-attr">size</span> = <span class="hljs-number">8</span>),
+              legend.<span class="hljs-attr">text</span> = element_text(<span class="hljs-attr">size</span> = <span class="hljs-number">8</span>),
+              legend.<span class="hljs-attr">title=element_text(face</span> = <span class="hljs-string">"bold"</span>, <span class="hljs-attr">size</span> = <span class="hljs-number">8</span>))
+p
+</code>
+</pre>
+<p><img src="./media/r_gender_paradox/unnamed-chunk-18-1.png" alt="Screenshot of graph"></p>
+<h4 id="some-observations-and-thoughts">Some observations and thoughts</h4>
+<p>From the scatterplot, it&#39;s clear that Northern European countries, particularly, those in Scandinavia, gravitate towards a higher Gender Gap Index score and lower percentage of female STEM graduates while the inverse is true for West Asian countries (which include the Middle East).</p>
+<p>In the study, Stoet and Geary (the authors ) state that &quot;life-quality pressures&quot; in less gender-equal countries may be at play for a higher proportion of female engagement with STEM, suggesting that women may simply be less interested in STEM if they have a choice. Adam Mastroianni and Dakota McCoy posted on the <a href="https://blogs.scientificamerican.com/voices/countries-with-less-gender-equity-have-more-women-in-stem-huh/">Scientific American blog</a> that they disagree. For them, the answer had to do with (discriminatory) cultural attitudes toward women in STEM.</p>
+<p>I&#39;m more inclined towards the latter view, and I think that in countries with greater gender inequality, there is less difference in the extent of cultural biases that women face being in STEM versus non-STEM. This, in turn, results in less of a barrier for women entering STEM.</p>
+<p>Back to the scatterplot, here&#39;s another interesting point: While a good number of countries that perform better on the Gender Gap Index tend to be wealthier as denoted by larger bubble sizes, there are much poorer countries performing just as well. These countries are from Sub-Saharan Africa.</p>
+
+</section>
+
+<section class="footer">
+      <hr/>
+      <div class="social">
+  <a href="mailto:alexandra.khoo@gmail@@com"
+     onclick="this.href=this.href.replace('@@','.')" title="Email">
+  <i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/alexandra-khoo-15517557/" title="Linkedin" >
+  <i class="fab fa-linkedin"></i></a>
+  <a href="http://github.com/thedatacurious" title="GitHub" >
+  <i class="fab fa-github"></i></a>
+        <a href="https://medium.com/@the.data.curious" title="Medium" >
+  <i class="fab fa-medium"></i></a>
+      </div>
+    <p>Website personally designed and built © <span id="date"></span> Alexandra Khoo</p>
+</section>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-r.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script> -->
+<script src="index.js"></script>
+
+
+</body>
