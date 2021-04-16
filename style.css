@@ -24,6 +24,7 @@ section{
 .grid-home {
   display:grid;
   grid-template-rows: auto 1fr 1fr auto auto auto auto;
+  grid-template-columns: repeat(auto-fill,1fr);
   grid-template-areas:
   "nav"
   "main-left"
@@ -156,6 +157,10 @@ img.story {
   color: #f4f4f4 !important;
 }
 
+.resume{
+  display: flex;
+  margin:auto;
+}
 .btn.resume{
  border-radius: 5px 5px 5px 5px;
 }
