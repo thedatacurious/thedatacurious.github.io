@@ -59,8 +59,11 @@ section{
   "card-synthesis";
 }
 
+@media only screen and (max-width: 767px){
+  body{width:100%;}
+}
 
-@media (min-width: 720px){
+@media (min-width: 768px){
   .grid-home {
     display:grid;
     grid-template-rows: auto 90vh auto auto auto auto;
