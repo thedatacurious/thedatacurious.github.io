@@ -1,26 +1,53 @@
+/* Main element styling */
 
 a {
   color: #4A6C6F;
-}
-
-.nav-link{
-  font-weight: 500;
 }
 
 a:hover, .nav-link:hover{
   color:#FF686B !important;
 }
 
-
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f4f4f4;
-  padding: 0 8%;
+  margin: auto 8%;
+}
+
+h1 {
+  color: #4A6C6F;
+  font-weight: 520;
+  font-size: 3rem;
+  line-height: 1.5;
+}
+h2,h3{
+  text-align: center;
+  line-height: 2.6;
+  color: #4A6C6F;
+}
+
+h5 {
+  color: #4A6C6F;
+}
+
+/* Styling for social media (and navbar) icons */
+
+i{
+font-size: 1.5rem;
+padding: 4px;
+}
+
+
+i:hover{
+-webkit-transform: scale(1.2);
+color: #FF686B !important;
 }
 
 section{
-  padding: 4% 0;
+  padding-top: 5%;
 }
+
+/* Applying CSS grid for overall layout */
 
 @media screen and (max-width:567px){
 
@@ -38,36 +65,11 @@ div.grid-home {
   }
 }
 
-/* div.grid-articles {
-  padding: 0 8%;
-} */
-
-/* .scroll{
-  position:absolute;
-  left: 50%;
-  bottom: 5%;
-  color:#FF686B;
-  } */
-
-.grid-card{
-  display:grid;
-  grid-template-columns: repeat(auto-fill,minmax(360px, 0.8fr));
-  grid-gap: 24px;
-  align-items: top;
-  justify-content: center;
-  grid-template-areas:
-  "card-styleguide"
-  "card-nightingale"
-  "card-cupcakes"
-  "card-synthesis";
-}
-
-
-
 @media screen and (min-width: 768px){
   div.grid-home {
     display:grid;
-    grid-template-rows: auto 90vh auto auto auto auto;
+    align-items: center;
+    grid-template-rows: auto 100vh auto auto auto auto;
     grid-template-areas:
     "nav nav"
     "main-left main-right"
@@ -76,15 +78,6 @@ div.grid-home {
     "story story"
     "footer footer";
   }
-}
-
-nav {
-  background-color: #f4f4f4;
-  grid-area: nav;
-}
-
-.text-muted{
-  color:#666E76 !important;
 }
 
 .main-left{
@@ -102,39 +95,12 @@ nav {
   min-width: 400px;
 }
 
-
 .projects{
   grid-area: projects;
 }
 
 .talks{
   grid-area: talks;
-}
-
-.story{
-  grid-area: story;
-}
-
-.footer{
-  grid-area: footer;
-  text-align: center;
-}
-
-
-h1 {
-  color: #4A6C6F;
-  font-weight: 520;
-  font-size: 3.2rem;
-  line-height: 1.5;
-}
-h2,h3{
-  text-align: center;
-  line-height: 2.6;
-  color: #4A6C6F;
-}
-
-h5 {
-  color: #4A6C6F;
 }
 
 img.story {
@@ -144,6 +110,23 @@ img.story {
   max-width: 24%;
   min-width: 360px;
 }
+
+.story{
+  grid-area: story;
+}
+
+div.text{
+  margin: auto;
+  padding: 0% 5%;
+  max-width: 800px;
+}
+
+.footer{
+  grid-area: footer;
+  text-align: center;
+}
+
+/* Button styles */
 
 .btn {
   border-radius: 0px 0px 5px 5px;
@@ -167,6 +150,50 @@ img.story {
 border-radius: 5px 5px 5px 5px;
 }
 
+/* De-emphasized text style */
+
+.text-muted{
+  color:#666E76 !important;
+}
+
+/* Styling for navigation bar */
+
+.navbar {
+  background-color: #f4f4f4;
+  grid-area: nav;
+}
+
+.fa-bars{
+  color: #4A6C6F;
+}
+
+.nav-link{
+  font-weight: 500;
+}
+
+.navbar-toggler{
+  border: none;
+}
+
+.navbar-toggler:focus{
+  box-shadow: none;
+}
+
+/* Styling for Project section*/
+.grid-card{
+  display:grid;
+  grid-template-columns: repeat(auto-fill,minmax(360px, 0.8fr));
+  grid-gap: 24px;
+  align-items: top;
+  justify-content: center;
+  /* grid-template-areas:
+  "card-styleguide"
+  "card-nightingale"
+  "card-cupcakes"
+  "card-synthesis"; */
+}
+
+/* Card hover effect */
 .card-container {
     display: grid;
     perspective: 1000px;
@@ -209,16 +236,12 @@ p.no-show{
   background-color: #666E76;
   padding: 60px 10px;
   margin: 10% auto;
-
 }
 
-i{
-font-size: 1.8rem;
-padding: 4px;
-}
-
-
-i:hover{
--webkit-transform: scale(1.2);
-color: #FF686B !important;
-}
+/* Had a hard time aligning the scroll icon so am parking in here */
+/* .scroll{
+  position:absolute;
+  left: 50%;
+  bottom: 5%;
+  color:#FF686B;
+  } */
