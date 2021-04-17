@@ -44,7 +44,7 @@ color: #FF686B !important;
 }
 
 section{
-  padding-top: 5%;
+  padding-top: 8%;
 }
 
 /* Applying CSS grid for overall layout */
@@ -80,19 +80,26 @@ div.grid-home {
   }
 }
 
-.main-left{
+nav{
+  grid-area: nav;
+  width: 84%;
   margin: auto;
+}
+
+.main-left{
   grid-area: main-left;
+  padding-top: 8%;
 }
 
 .main-right{
   grid-area: main-right;
-  margin: auto;
+  padding-top: 8%;
+  padding-left: 4%;
 }
 
 .main-img{
   max-width: 100%;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 .projects{
@@ -160,7 +167,6 @@ border-radius: 5px 5px 5px 5px;
 
 .navbar {
   background-color: #f4f4f4;
-  grid-area: nav;
 }
 
 .fa-bars{
