@@ -18,7 +18,6 @@ h1 {
   color: #4A6C6F;
   font-weight: 520;
   font-size: 3 rem;
-  line-height: 1.5;
 }
 h2,h3{
   text-align: center;
@@ -89,7 +88,7 @@ nav{
 
 .main-left{
   grid-area: main-left;
-  padding-top: 8%;
+  padding-top: 15%;
 }
 
 .main-right{
