@@ -17,8 +17,9 @@ body {
 h1 {
   color: #4A6C6F;
   font-weight: 520;
-  font-size: 3.6 rem;
+  font-size: 3.2rem;
 }
+
 h2,h3{
   text-align: center;
   line-height: 2.6;
@@ -52,7 +53,7 @@ section{
 
 div.grid-home {
   display:grid;
-  grid-template-rows: auto 30vh 60vh auto auto auto auto;
+  grid-template-rows: auto 40vh 60vh auto auto auto auto;
   grid-template-areas:
   "nav"
   "main-left"
@@ -62,6 +63,15 @@ div.grid-home {
   "story"
   "footer";
   }
+
+h1{
+    font-size: 2.8rem;
+    margin-top: 40%;
+    }
+
+
+
+
 }
 
 @media screen and (min-width: 768px){
@@ -87,14 +97,14 @@ nav{
 }
 
 .main-left{
+  margin-top: 8%;
   grid-area: main-left;
-  margin-top: 15%;
 }
 
 .main-right{
   grid-area: main-right;
-  margin-top: 4%;
-  padding-left: 4%;
+  margin-top: 8%;
+  padding-left: 12%;
 }
 
 .main-img{
