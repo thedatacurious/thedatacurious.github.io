@@ -11,7 +11,7 @@ a:hover, .nav-link:hover{
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f4f4f4;
-  margin: auto 6%;
+  margin: auto 5%;
 }
 
 h1 {
@@ -83,17 +83,17 @@ nav{
   grid-area: nav;
   width: 100%;
   margin: auto;
-  padding: 0 8%;
+  padding: 0 5%;
 }
 
 .main-left{
   grid-area: main-left;
-  padding-top: 15%;
+  margin-top: 15%;
 }
 
 .main-right{
   grid-area: main-right;
-  padding-top: 8%;
+  margin-top: 4%;
   padding-left: 4%;
 }
 
@@ -115,7 +115,7 @@ img.story {
   margin-left: auto;
   margin-right: auto;
   max-width: 24%;
-  min-width: 320px;
+  min-width: 300px;
 }
 
 .story{
