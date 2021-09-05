@@ -245,7 +245,13 @@ border-radius: 5px 5px 5px 5px;
     transition: all 0.8s ease;
 }
 
+/* .card-body {
+  background-color: white;
+  border-radius: 5px;
+} */
+
 .flip-card-front, .flip-card-back{
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform-style: preserve-3d;
     grid-area: frontAndBack;
