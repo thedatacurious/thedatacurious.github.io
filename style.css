@@ -73,17 +73,9 @@ h1{
     padding-top: 20%;
     }
 
-
-
-
 }
 
-
-
 @media screen and (min-width: 768px){
-  img.comic {
-    max-width:70vw;
-  }
 
   div.grid-home {
     display:grid;
@@ -97,6 +89,10 @@ h1{
     "story story"
     "footer footer";
   }
+}
+
+img.comic {
+  max-width:70vw;
 }
 
 @media screen and (min-width: 1000px){
