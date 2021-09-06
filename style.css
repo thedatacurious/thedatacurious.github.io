@@ -44,10 +44,6 @@ i:hover{
 color: #FF686B !important;
 }
 
-p {
-  color: black;
-}
-
 section{
   padding-top: 8%;
 }
@@ -259,7 +255,7 @@ border-radius: 5px 5px 5px 5px;
 .flip-card-front, .flip-card-back{
     transform-style: preserve-3d;
     grid-area: frontAndBack;
-    color: white;
+    background-color: white;
     -webkit-perspective: 0;
     -webkit-backface-visibility: hidden;
     -webkit-transform: translate3d(0,0,0);
