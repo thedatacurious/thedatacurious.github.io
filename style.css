@@ -4,6 +4,7 @@ a {
   color: #4A6C6F;
 }
 
+
 a:hover, .nav-link:hover{
   color:#FF686B !important;
 }
@@ -41,6 +42,10 @@ padding: 4px;
 i:hover{
 -webkit-transform: scale(1.2);
 color: #FF686B !important;
+}
+
+p {
+  color: black;
 }
 
 section{
