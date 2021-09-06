@@ -242,6 +242,7 @@ border-radius: 5px 5px 5px 5px;
     grid-template: 1fr / 1fr;
     grid-template-areas: "frontAndBack";
     transform-style: preserve-3d;
+    -webkit-transform: translate3d(0,0,0);
     transition: all 0.8s ease;
 }
 
@@ -251,10 +252,14 @@ border-radius: 5px 5px 5px 5px;
 } */
 
 .flip-card-front, .flip-card-back{
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     transform-style: preserve-3d;
     grid-area: frontAndBack;
+    color: white;
+    -webkit-perspective: 0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    visibility:visible;
+    backface-visibility: hidden;
 }
 
 .flip-card-back {
