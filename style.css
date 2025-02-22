@@ -175,10 +175,10 @@ div.text{
   color: #f4f4f4 !important;
 }
 
-.resume{
+/* .resume{
   display: flex;
   justify-content: center;
-}
+} */
 
 .btn.resume{
 border-radius: 5px 5px 5px 5px;
