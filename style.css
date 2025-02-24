@@ -219,11 +219,6 @@ border-radius: 5px 5px 5px 5px;
   grid-gap: 24px;
   align-items: top;
   justify-content: center;
-  /* grid-template-areas:
-  "card-styleguide"
-  "card-nightingale"
-  "card-cupcakes"
-  "card-synthesis"; */
 }
 
 /* Card hover effect */
