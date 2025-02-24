@@ -63,9 +63,9 @@ div.grid-home {
   "nav"
   "main-left"
   "main-right"
-  "story"
-  "projects"
+  "data"
   "ops"
+  "story"
   "footer";
   }
 
@@ -85,9 +85,9 @@ h1{
     grid-template-areas:
     "nav nav"
     "main-left main-right"
-    "story story"
-    "projects projects"
+    "data data"
     "ops ops"
+    "story story"
     "footer footer";
   }
 }
@@ -126,8 +126,8 @@ nav{
   min-width: 300px;
 }
 
-.projects{
-  grid-area: projects;
+.data{
+  grid-area: data;
 }
 
 .ops{
