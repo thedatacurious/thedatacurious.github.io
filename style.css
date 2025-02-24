@@ -64,7 +64,7 @@ div.grid-home {
   "main-left"
   "main-right"
   "projects"
-  "talks"
+  "ops"
   "story"
   "footer";
   }
@@ -86,7 +86,7 @@ h1{
     "nav nav"
     "main-left main-right"
     "projects projects"
-    "talks talks"
+    "ops ops"
     "story story"
     "footer footer";
   }
@@ -130,8 +130,8 @@ nav{
   grid-area: projects;
 }
 
-.talks{
-  grid-area: talks;
+.ops{
+  grid-area: ops;
 }
 
 img.story {
