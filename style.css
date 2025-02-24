@@ -58,7 +58,6 @@ img.comic {
 
 div.grid-home {
   display:grid;
-  grid-template-rows: auto 1fr 2fr auto auto auto auto;
   grid-template-areas:
   "nav"
   "main-left"
@@ -81,7 +80,6 @@ h1{
   div.grid-home {
     display:grid;
     align-items: center;
-    grid-template-rows: auto 100vh auto auto auto auto;
     grid-template-areas:
     "nav nav"
     "main-left main-right"
