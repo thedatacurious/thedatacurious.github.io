@@ -81,12 +81,12 @@ h1{
     display:grid;
     align-items: center;
     grid-template-areas:
-    "nav nav"
-    "main-left main-right"
-    "data data"
-    "ops ops"
-    "story story"
-    "footer footer";
+    "nav nav nav nav"
+    "main-left main-right main-right main-right"
+    "data data data data"
+    "ops ops ops ops"
+    "story story story story"
+    "footer footer footer footer";
   }
 }
 
@@ -111,16 +111,17 @@ nav{
 .main-left{
   margin-top: 8%;
   grid-area: main-left;
+  text-align: center;
 }
 
 .main-right{
   grid-area: main-right;
   margin-top: 8%;
-  padding-left: 12%;
+  /* padding-left: 12%; */
 }
 
 .main-img{
-  max-width: 100%;
+  max-width: 500px;
   min-width: 300px;
 }
 
